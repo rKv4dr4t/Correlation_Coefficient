@@ -32,9 +32,9 @@ def getCorrelation(symbol1, symbol2, dict):
         else:
             dict[symbol2] = [ round( np.corrcoef(data1['Close'][number_item:], data2['Close'][number_item:])[0,1], 2) ]
 
-# for symbol in symbols:
-#     getCorrelation('^GSPC', symbol, getTotal_correlation0)
-#     getCorrelation('USD', symbol, getTotal_correlation1)
+for symbol in symbols:
+    getCorrelation('^GSPC', symbol, getTotal_correlation0)
+    getCorrelation('USD', symbol, getTotal_correlation1)
 
 header0 = [np.array([comparison_symbols[0], comparison_symbols[0], comparison_symbols[0], comparison_symbols[0], comparison_symbols[0]]), np.array(period_timeframe)] 
 header1 = [np.array([comparison_symbols[1], comparison_symbols[1], comparison_symbols[1], comparison_symbols[1], comparison_symbols[1]]), np.array(period_timeframe)] 
@@ -50,8 +50,8 @@ print(result)
 
 
 
-ticker1 = yahooFinance.Ticker('SPXL')
-data1 = ticker1.history(period = '2d', interval = '1h')
-print(data1)
+# ticker1 = yahooFinance.Ticker('SPXL')
+# data1 = ticker1.history(period = '2d', interval = '1h')
+# print(data1)
 
 
