@@ -1,0 +1,32 @@
+# stampa la data odierna nel nome del file Excel
+dateOn: False
+
+# range di tempo da scansionare 
+period_timeframe:   ['1d', '15d', '30d', '90d', '120d']
+
+# intervallo di tempo per ciascun range
+# valori consentiti: 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo
+interval_timeframe: ['1h', '1d',  '1d',  '1d',  '1d']
+
+# indici da comparare (colonne)
+# indici estratti da https://it.finance.yahoo.com/
+comparison_symbols: [
+'^GSPC', 
+'BTC-USD'
+]
+
+# indici da comparare (righe)
+# indici estratti da https://it.finance.yahoo.com/
+# symbols = [
+# 'AUDUSD=X', 'GBPUSD=X', 'EURUSD=X', 'JPYUSD=X', 'CHFUSD=X', 'USD', 'MXNUSD=X', 'NZDUSD=X', 'BTC-USD',
+# '^GSPC', '^NDX', '^DJI',
+# 'UCO', 'UGA', '^RUT',
+# 'CORN',
+# 'GOLD'
+# ]
+
+symbols: [
+'GOLD',
+'USD',
+'AUDUSD=X'
+]

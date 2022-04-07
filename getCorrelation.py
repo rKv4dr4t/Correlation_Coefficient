@@ -1,50 +1,86 @@
 import numpy as np
-# import pandas_datareader as pdr
-# import datetime as dt
 import pandas as pd
 import yfinance as yahooFinance
+import yaml
+from tqdm import tqdm
+from datetime import date
 
-comparison_symbols = ['^GSPC', 'USD']
 
-symbols = [
-'AUDUSD=X', 'GBPUSD=X', 'EURUSD=X', 'JPYUSD=X', 'CHFUSD=X', 'USD', 'MXNUSD=X', 'NZDUSD=X', 'BTC-USD',
-'^GSPC', '^NDX', '^DJI',
-'UCO', 'UGA', '^RUT',
-'CORN',
-'GOLD'
-]
+with open('config.yml', 'r') as file:
+    config = yaml.safe_load(file)
 
-period_timeframe = ['1d', '15d', '30d', '90d', '120d']
-interval_timeframe = ['1h', '1d', '1d', '1wk', '1mo']
-number_toget = [-3, -15, -30, -10, -3]
+# number_toget = [-3, -15, -30, -10, -3]
 getTotal_correlation0 = {}
 getTotal_correlation1 = {}
 
-
 def getCorrelation(symbol1, symbol2, dict):
-    for period_item, interval_item, number_item in zip(period_timeframe, interval_timeframe, number_toget):
+    for period_item, interval_item in zip(config['period_timeframe'], config['interval_timeframe']):
         ticker1 = yahooFinance.Ticker(symbol1)
         data1 = ticker1.history(period = period_item, interval = interval_item)
         ticker2 = yahooFinance.Ticker(symbol2)
         data2 = ticker2.history(period = period_item, interval = interval_item)
-        if symbol2 in dict:
-            dict[symbol2].append( round( np.corrcoef(data1['Close'][number_item:], data2['Close'][number_item:])[0,1], 2) )
+        if len(data1) > len(data2):
+            length = len(data2) 
         else:
-            dict[symbol2] = [ round( np.corrcoef(data1['Close'][number_item:], data2['Close'][number_item:])[0,1], 2) ]
+            length = len(data1) 
+        # print(symbol2 + " " + str(length))
+        if symbol2 in dict:
+            dict[symbol2].append( round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) )
+        else:
+            dict[symbol2] = [ round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) ]
 
-for symbol in symbols:
-    getCorrelation('^GSPC', symbol, getTotal_correlation0)
-    getCorrelation('USD', symbol, getTotal_correlation1)
 
-header0 = [np.array([comparison_symbols[0], comparison_symbols[0], comparison_symbols[0], comparison_symbols[0], comparison_symbols[0]]), np.array(period_timeframe)] 
-header1 = [np.array([comparison_symbols[1], comparison_symbols[1], comparison_symbols[1], comparison_symbols[1], comparison_symbols[1]]), np.array(period_timeframe)] 
+print('Caricamento degli indici...')
+for idx, symbol in enumerate(tqdm(config['symbols'])):
+    getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
+    getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
+
+header0 = [np.array([config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0]]), np.array(config['period_timeframe'])] 
+header1 = [np.array([config['comparison_symbols'][1], config['comparison_symbols'][1], config['comparison_symbols'][1], config['comparison_symbols'][1], config['comparison_symbols'][1]]), np.array(config['period_timeframe'])] 
 df0 = pd.DataFrame(getTotal_correlation0, index = header0).transpose()
 df1 = pd.DataFrame(getTotal_correlation1, index = header1).transpose()
-
-
 result = pd.concat([df0, df1], axis=1)
+
+# getCorrelation('^GSPC', 'USD', getTotal_correlation0)
+# ticker1 = yahooFinance.Ticker('BTC-USD')
+# data1 = ticker1.history(period = '1d', interval = '1h')
+# print(data1)
 print(result)
-# pd.DataFrame(result).to_excel("result.xlsx") 
+
+
+today = date.today()
+d1 = today.strftime("%d-%m-%Y")
+d1Tot = 'correlation-' + d1 + '.xlsx'
+if config['dateOn'] == True:
+    nameExcel = d1Tot
+else:
+    nameExcel = 'correlation.xlsx'
+
+
+writer = pd.ExcelWriter(nameExcel, engine='xlsxwriter')
+result.to_excel(writer, sheet_name='Sheet1')
+workbook  = writer.book
+worksheet = writer.sheets['Sheet1']
+format1 = workbook.add_format({'bg_color': '#FFC7CE',
+                               'font_color': '#9C0006'})
+format2 = workbook.add_format({'bg_color': '#C6EFCE',
+                               'font_color': '#006100'})
+worksheet.conditional_format('B3:K50', {'type': 'cell',
+                                         'criteria': '<=',
+                                         'value': -0.5,
+                                         'format': format1})
+worksheet.conditional_format('B4:K50', {'type': 'cell',
+                                         'criteria': '>=',
+                                         'value': 0.5,
+                                         'format': format2})
+worksheet.set_column(0, 0, 15)
+writer.save()
+
+
+
+
+
+# pd.DataFrame(result).to_excel(nameExcel) 
 
 
 
