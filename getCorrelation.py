@@ -14,9 +14,9 @@ symbols = [
 'GOLD'
 ]
 
-period_timeframe = ['2d', '15d', '30d', '90d', '120d']
+period_timeframe = ['1d', '15d', '30d', '90d', '120d']
 interval_timeframe = ['1h', '1d', '1d', '1wk', '1mo']
-number_toget = [-3, -15, -30, -90, -120]
+number_toget = [-3, -15, -30, -10, -3]
 getTotal_correlation0 = {}
 getTotal_correlation1 = {}
 
