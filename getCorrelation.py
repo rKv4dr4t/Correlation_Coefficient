@@ -45,22 +45,15 @@ def getCorrelation(symbol1, symbol2, dict):
             dict[symbol2] = [ round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) ]
 
 print('Caricamento degli indici...')
-
-# loop function through symbols
-for idx, symbol in enumerate(tqdm(config['symbols'])):
-    getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
-    getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
-
 #########################################################
-# NOTA: il valore giornaliero potrebbe restituire 0, 3 o 7, a seconda del momento della giornata
-# NOTA: non spammare per evitare blocchi
-# getCorrelation('^GSPC', 'USD', getTotal_correlation0)
-
-# period_item = '1d'
-# ticker1 = yahooFinance.Ticker('GOLD')
-# data1 = ticker1.history(period = period_item, interval = '1h')
-# print(data1)
-
+# # loop function through symbols
+# for idx, symbol in enumerate(tqdm(config['symbols'])):
+#     getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
+#     getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
+#########################################################
+ticker1 = yahooFinance.Ticker('^NDX')
+data1 = ticker1.history(period = '1d', interval = '1h')
+print(data1)
 #########################################################
 
 # dataframe the results
@@ -70,7 +63,7 @@ df0 = pd.DataFrame(getTotal_correlation0, index = header0).transpose()
 df1 = pd.DataFrame(getTotal_correlation1, index = header1).transpose()
 result = pd.concat([df0, df1], axis=1)
 
-print(result)   ###########
+# print(result)   ###########
 
 # get today date
 today = date.today()

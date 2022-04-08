@@ -11,22 +11,94 @@ interval_timeframe: ['1h', '1d',  '1d',  '1d',  '1d']
 # indici da comparare (colonne)
 # indici estratti da https://it.finance.yahoo.com/
 comparison_symbols: [
+# S&P 500
 '^GSPC', 
+# U.S. Dollar
 'USD'
 ]
 
 # indici da comparare (righe)
 # indici estratti da https://it.finance.yahoo.com/
 symbols: [
-'AUDUSD=X', 'GBPUSD=X', 'EURUSD=X', 'JPYUSD=X', 'CHFUSD=X', 'USD', 'MXNUSD=X', 'NZDUSD=X', 'BTC-USD',
-'^GSPC', '^NDX', '^DJI',
-'UCO', 'UGA', '^RUT',
+# Currencies
+# Australian Dollar
+'AUDUSD=X',
+# British Pound Sterling       
+'GBPUSD=X', 
+# Euro
+'EURUSD=X', 
+# Japanese Yen
+'JPYUSD=X', 
+# Swiss Franc
+'CHFUSD=X', 
+# U.S. Dollar
+'USD', 
+# Mexican Peso
+'MXNUSD=X', 
+# New Zealand Dollar
+'NZDUSD=X', 
+# Bitcoin
+'BTC-USD',
+
+# Stock Indexes
+# S&P 500
+'^GSPC', 
+# Nasdaq
+'^NDX', 
+# Dow Jones 
+'^DJI',
+# Russell 
+'^RUT',
+
+# Energies
+# Crude Oil
+'UCO', 
+# Gasoline
+'UGA', 
+# Natural Gas
+'KOLD',
+
+# Grains
+# Corn
 'CORN',
-'GOLD'
+# Soybeans
+'ZS=F',
+# Soybean Oil
+'ZL=F',
+# Soybean Meal
+'ZM=F',
+# Wheat SRW
+'ZW=F',
+# Wheat HRW
+'KE=F',
+
+# Metals
+# Gold
+'GOLD',
+# Silver
+'SI=F',
+# Copper
+'HG=F',
+# Palladium
+'PA=F',
+
+# Softs
+# Cocoa
+'CC=F',
+# Cotton
+'CT=F',
+# Coffee
+'KC=F',
+# Sugar
+'SB=F'
 ]
 
 # symbols: [
 # 'GOLD',
-# 'USD',
-# 'AUDUSD=X'
+# # Silver
+# 'SI=F',
+# # Copper
+# 'HG=F',
+# # Palladium
+# 'PA=F',
 # ]

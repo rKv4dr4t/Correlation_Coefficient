@@ -14,7 +14,7 @@ All'interno del file `config.yml` si possono configurare diverse opzioni (i test
 - `symbols`: rappresenta i valori all'interno delle righe della tabella
 
 ## Avvio
-Una volta completato il setup e modificato (opzionalmente) il file `config.yml`, si può procedere ad avviare lo script tramite il file `start.bat`, il quale, dopo un caricamento di circa 1 o 2 minuti, genererà il file Excel.
+Una volta completato il setup e modificato (opzionalmente) il file `config.yml`, si può procedere ad avviare lo script tramite il file `start.bat`, il quale, dopo un caricamento di circa 2 o 3 minuti, genererà il file Excel.
 
 ## Note
-Le righe (quindi i simboli all'interno di `symbols`, in `config.yml`) possono essere aggiunte o rimosse, facendo sempre attenzione a mantenere la sintassi del file, dunque aggiungendo una virgola tra un elemento e un altro. Per evitare errori i simboli devono essere quelli utilizzati da Yahoo Finance. Le colonne contrariamente alle righe possono essere diminuite o aggiunte solamente all'interno del codice e non tramite le opzioni. I valori delle colonne (i simboli) possono essere invece modificabili tranquillamente. 
+La API di Yahoo Finance è una tecnologia gratuita e come tale dispone di blocchi verso qualunque tipo di spam. Per evitare blocchi temporanei quindi è importante non avviare lo script troppe volte nel giro di pochi minuti.
