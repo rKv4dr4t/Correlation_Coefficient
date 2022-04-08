@@ -21,19 +21,12 @@ def getCorrelation(symbol1, symbol2, dict):
         data2 = ticker2.history(period = period_item, interval = interval_item)
 
         # if first historical has trhee or less items, get the previous day
-        if period_item == '1d':
-            if len(data1) <= 3:
-                todayLen = len(data1)
-                period_item = '2d'
-                data1 = ticker1.history(period = period_item, interval = '1h')['Close'][-todayLen:]
-                if not todayLen == 0:
-                    del data1[-todayLen:]
-            if len(data2) <= 3:
-                todayLen = len(data2)
-                period_item = '2d'
-                data2 = ticker1.history(period = period_item, interval = '1h')['Close'][-todayLen:]
-                if not todayLen == 0:
-                    del data2[-todayLen:]
+        if len(data1) <= 3:
+            period_item = '2d'
+            data1 = ticker1.history(period = period_item, interval = interval_item)
+        if len(data2) <= 3:
+            period_item = '2d'
+            data2 = ticker2.history(period = period_item, interval = interval_item)
 
         if len(data1) > len(data2):
             length = len(data2) 
@@ -46,12 +39,12 @@ def getCorrelation(symbol1, symbol2, dict):
 
 print('Caricamento degli indici...')
 #########################################################
-# # loop function through symbols
+# loop function through symbols
 for idx, symbol in enumerate(tqdm(config['symbols'])):
     getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
     getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
 #########################################################
-# ticker1 = yahooFinance.Ticker('^NDX')
+# ticker1 = yahooFinance.Ticker('test')
 # data1 = ticker1.history(period = '1d', interval = '1h')
 # print(data1)
 #########################################################
@@ -63,7 +56,7 @@ df0 = pd.DataFrame(getTotal_correlation0, index = header0).transpose()
 df1 = pd.DataFrame(getTotal_correlation1, index = header1).transpose()
 result = pd.concat([df0, df1], axis=1)
 
-print(result)   ###########
+# print(result)   ###########
 
 # get today date
 today = date.today()

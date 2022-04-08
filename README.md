@@ -14,7 +14,7 @@ All'interno del file `config.yml` (da aprire con il blocco note) si possono conf
 - `symbols`: rappresenta i valori all'interno delle righe della tabella
 
 ## Avvio
-Una volta completato il setup e modificato (opzionalmente) il file `config.yml`, si può procedere ad avviare lo script tramite il file `start.bat`, il quale, dopo un caricamento di circa 2 o 3 minuti, genererà il file Excel.
+Una volta completato il setup e modificato (opzionalmente) il file `config.yml`, si può procedere ad avviare lo script tramite il file `start.bat`, il quale, dopo un caricamento di circa 3 o 4 minuti, genererà il file Excel.
 
 ## Note
 La API di Yahoo Finance è una tecnologia gratuita e come tale dispone di blocchi verso qualunque tipo di spam. Per evitare blocchi temporanei quindi è importante non avviare lo script troppe volte nel giro di pochi minuti.
