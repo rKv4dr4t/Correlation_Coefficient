@@ -17,16 +17,16 @@ comparison_symbols: [
 
 # indici da comparare (righe)
 # indici estratti da https://it.finance.yahoo.com/
-# symbols = [
-# 'AUDUSD=X', 'GBPUSD=X', 'EURUSD=X', 'JPYUSD=X', 'CHFUSD=X', 'USD', 'MXNUSD=X', 'NZDUSD=X', 'BTC-USD',
-# '^GSPC', '^NDX', '^DJI',
-# 'UCO', 'UGA', '^RUT',
-# 'CORN',
-# 'GOLD'
-# ]
-
 symbols: [
-'GOLD',
-'USD',
-'AUDUSD=X'
+'AUDUSD=X', 'GBPUSD=X', 'EURUSD=X', 'JPYUSD=X', 'CHFUSD=X', 'USD', 'MXNUSD=X', 'NZDUSD=X', 'BTC-USD',
+'^GSPC', '^NDX', '^DJI',
+'UCO', 'UGA', '^RUT',
+'CORN',
+'GOLD'
 ]
+
+# symbols: [
+# 'GOLD',
+# 'USD',
+# 'AUDUSD=X'
+# ]
