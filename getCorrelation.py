@@ -5,6 +5,7 @@ import yaml
 from tqdm import tqdm
 from datetime import date
 
+
 # open yaml file
 with open('config.yml', 'r') as file:
     config = yaml.safe_load(file)
@@ -15,18 +16,19 @@ getTotal_correlation1 = {}
 # function to get correlation
 def getCorrelation(symbol1, symbol2, dict):
     for period_item, interval_item in zip(config['period_timeframe'], config['interval_timeframe']):
+        if period_item == '1d':
+            period_item = '2d'
         ticker1 = yahooFinance.Ticker(symbol1)
         data1 = ticker1.history(period = period_item, interval = interval_item)
         ticker2 = yahooFinance.Ticker(symbol2)
         data2 = ticker2.history(period = period_item, interval = interval_item)
 
         # if first historical has trhee or less items, get the previous day
-        if len(data1) <= 3:
-            period_item = '2d'
-            data1 = ticker1.history(period = period_item, interval = interval_item)
-        if len(data2) <= 3:
-            period_item = '2d'
-            data2 = ticker2.history(period = period_item, interval = interval_item)
+        # if len(data1) <= 3:
+        #     data1 = ticker1.history(period = period_item, interval = interval_item)
+        # if len(data2) <= 3:
+        #     period_item = '2d'
+        #     data2 = ticker2.history(period = period_item, interval = interval_item)
 
         if len(data1) > len(data2):
             length = len(data2) 
@@ -38,16 +40,15 @@ def getCorrelation(symbol1, symbol2, dict):
             dict[symbol2] = [ round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) ]
 
 print('Caricamento degli indici...')
-#########################################################
+
 # loop function through symbols
 for idx, symbol in enumerate(tqdm(config['symbols'])):
     getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
     getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
-#########################################################
-# ticker1 = yahooFinance.Ticker('test')
+
+# ticker1 = yahooFinance.Ticker('AAPL')
 # data1 = ticker1.history(period = '1d', interval = '1h')
 # print(data1)
-#########################################################
 
 # dataframe the results
 header0 = [np.array([config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0]]), np.array(config['period_timeframe'])] 
