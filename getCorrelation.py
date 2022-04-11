@@ -24,13 +24,6 @@ def getCorrelation(symbol1, symbol2, dict):
         ticker2 = yahooFinance.Ticker(symbol2)
         data2 = ticker2.history(period = period_item, interval = interval_item)
 
-        # if first historical has trhee or less items, get the previous day
-        # if len(data1) <= 3:
-        #     data1 = ticker1.history(period = period_item, interval = interval_item)
-        # if len(data2) <= 3:
-        #     period_item = '2d'
-        #     data2 = ticker2.history(period = period_item, interval = interval_item)
-
         if len(data1) > len(data2):
             length = len(data2) 
         else:
@@ -51,7 +44,6 @@ for idx, symbol in enumerate(tqdm(config['symbols'])):
 # ticker1 = yahooFinance.Ticker('SB=F')
 # data1 = ticker1.history(period = '1d', interval = '1h')
 # print(data1)
-
 
 # dataframe the results
 header0 = [np.array([config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0]]), np.array(config['period_timeframe'])] 

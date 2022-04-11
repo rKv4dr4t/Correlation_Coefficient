@@ -21,122 +21,126 @@ comparison_symbols: [
 
 # indici da comparare (righe)
 # indici estratti da https://it.finance.yahoo.com/
+# symbols: [
+# # Currencies
+# # Australian Dollar
+# 'AUDUSD=X',
+# # British Pound Sterling       
+# 'GBPUSD=X', 
+# # Euro
+# 'EURUSD=X', 
+# # Japanese Yen
+# 'JPYUSD=X', 
+# # Swiss Franc
+# 'CHFUSD=X', 
+# # U.S. Dollar
+# 'USD', 
+# # Mexican Peso
+# 'MXNUSD=X', 
+# # New Zealand Dollar
+# 'NZDUSD=X', 
+# # Bitcoin
+# 'BTC-USD',
+
+# # Stock Indexes
+# # S&P 500
+# '^GSPC', 
+# # Nasdaq
+# '^NDX', 
+# # Dow Jones 
+# '^DJI',
+# # Russell 
+# '^RUT',
+
+# # Energies
+# # Crude Oil
+# 'UCO', 
+# # Gasoline
+# 'UGA', 
+# # Natural Gas
+# 'KOLD',
+
+# # Grains
+# # Corn
+# 'CORN',
+# # Soybeans
+# 'ZS=F',
+# # Soybean Oil
+# 'ZL=F',
+# # Soybean Meal
+# 'ZM=F',
+# # Wheat SRW
+# 'ZW=F',
+# # Wheat HRW
+# 'KE=F',
+
+# # Metals
+# # Gold
+# 'GOLD',
+# # Silver
+# 'SI=F',
+# # Copper
+# 'HG=F',
+# # Palladium
+# 'PA=F',
+
+# # Softs
+# # Cocoa
+# 'CC=F',
+# # Cotton
+# 'CT=F',
+# # Coffee
+# 'KC=F',
+# # Sugar
+# 'SB=F'
+# ]
+
 symbols: [
-# Currencies
-# Australian Dollar
-'AUDUSD=X',
-# British Pound Sterling       
-'GBPUSD=X', 
-# Euro
-'EURUSD=X', 
-# Japanese Yen
-'JPYUSD=X', 
-# Swiss Franc
-'CHFUSD=X', 
-# U.S. Dollar
-'USD', 
-# Mexican Peso
-'MXNUSD=X', 
-# New Zealand Dollar
-'NZDUSD=X', 
-# Bitcoin
-'BTC-USD',
-
-# Stock Indexes
-# S&P 500
-'^GSPC', 
-# Nasdaq
-'^NDX', 
-# Dow Jones 
-'^DJI',
-# Russell 
-'^RUT',
-
-# Energies
-# Crude Oil
-'UCO', 
-# Gasoline
-'UGA', 
-# Natural Gas
-'KOLD',
-
-# Grains
-# Corn
-'CORN',
-# Soybeans
-'ZS=F',
-# Soybean Oil
-'ZL=F',
-# Soybean Meal
-'ZM=F',
-# Wheat SRW
-'ZW=F',
-# Wheat HRW
-'KE=F',
-
-# Metals
-# Gold
-'GOLD',
-# Silver
-'SI=F',
-# Copper
-'HG=F',
-# Palladium
-'PA=F',
-
-# Softs
-# Cocoa
-'CC=F',
-# Cotton
-'CT=F',
-# Coffee
-'KC=F',
-# Sugar
-'SB=F'
+  'GOLD'
 ]
 
 rowNames: [
 # Currencies
 'Australian Dollar',    
-'British Pound Sterlin', 
-'Euro', 
-'Japanese Yen', 
-'Swiss Franc', 
-'U.S. Dollar', 
-'Mexican Peso', 
-'New Zealand Dollar', 
-'Bitcoin',
+# 'British Pound Sterlin', 
+# 'Euro', 
+# 'Japanese Yen', 
+# 'Swiss Franc', 
+# 'U.S. Dollar', 
+# 'Mexican Peso', 
+# 'New Zealand Dollar', 
+# 'Bitcoin',
 
-# Stock Indexes
-'S&P 500', 
-'Nasdaq', 
-'Dow Jones',
-'Russell',
+# # Stock Indexes
+# 'S&P 500', 
+# 'Nasdaq', 
+# 'Dow Jones',
+# 'Russell',
 
-# Energies
-'Crude Oil', 
-'Gasoline', 
-'Natural Gas',
+# # Energies
+# 'Crude Oil', 
+# 'Gasoline', 
+# 'Natural Gas',
 
-# Grains
-'Corn',
-'Soybeans',
-'Soybean Oil',
-'Soybean Meal',
-'Wheat SRW',
-'Wheat HRW',
+# # Grains
+# 'Corn',
+# 'Soybeans',
+# 'Soybean Oil',
+# 'Soybean Meal',
+# 'Wheat SRW',
+# 'Wheat HRW',
 
-# Metals
-'Gold',
-'Silver',
-'Copper',
-'Palladium',
+# # Metals
+# 'Gold',
+# 'Silver',
+# 'Copper',
+# 'Palladium',
 
-# Softs
-'Cocoa',
-'Cotton',
-'Coffee',
-'Sugar'
+# # Softs
+# 'Cocoa',
+# 'Cotton',
+# 'Coffee',
+# 'Sugar'
 ]
 
 columnsNames: [
