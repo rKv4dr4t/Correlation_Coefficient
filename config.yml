@@ -14,7 +14,9 @@ comparison_symbols: [
 # S&P 500
 '^GSPC', 
 # U.S. Dollar
-'USD'
+'USD',
+# Nasdaq
+^NDX
 ]
 
 # indici da comparare (righe)
@@ -93,12 +95,52 @@ symbols: [
 'SB=F'
 ]
 
-# symbols: [
-# 'GOLD',
-# # Silver
-# 'SI=F',
-# # Copper
-# 'HG=F',
-# # Palladium
-# 'PA=F',
-# ]
+rowNames: [
+# Currencies
+'Australian Dollar',    
+'British Pound Sterlin', 
+'Euro', 
+'Japanese Yen', 
+'Swiss Franc', 
+'U.S. Dollar', 
+'Mexican Peso', 
+'New Zealand Dollar', 
+'Bitcoin',
+
+# Stock Indexes
+'S&P 500', 
+'Nasdaq', 
+'Dow Jones',
+'Russell',
+
+# Energies
+'Crude Oil', 
+'Gasoline', 
+'Natural Gas',
+
+# Grains
+'Corn',
+'Soybeans',
+'Soybean Oil',
+'Soybean Meal',
+'Wheat SRW',
+'Wheat HRW',
+
+# Metals
+'Gold',
+'Silver',
+'Copper',
+'Palladium',
+
+# Softs
+'Cocoa',
+'Cotton',
+'Coffee',
+'Sugar'
+]
+
+columnsNames: [
+  'S&P500',
+  'U.S. Dollar',
+  'Nasdaq'
+]

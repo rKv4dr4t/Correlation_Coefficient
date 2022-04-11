@@ -12,6 +12,7 @@ with open('config.yml', 'r') as file:
 
 getTotal_correlation0 = {}
 getTotal_correlation1 = {}
+getTotal_correlation2 = {}
 
 # function to get correlation
 def getCorrelation(symbol1, symbol2, dict):
@@ -45,17 +46,23 @@ print('Caricamento degli indici...')
 for idx, symbol in enumerate(tqdm(config['symbols'])):
     getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
     getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
+    getCorrelation(config['comparison_symbols'][2], symbol, getTotal_correlation2)
 
-# ticker1 = yahooFinance.Ticker('AAPL')
+# ticker1 = yahooFinance.Ticker('SB=F')
 # data1 = ticker1.history(period = '1d', interval = '1h')
 # print(data1)
 
+
 # dataframe the results
-header0 = [np.array([config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0], config['comparison_symbols'][0]]), np.array(config['period_timeframe'])] 
-header1 = [np.array([config['comparison_symbols'][1], config['comparison_symbols'][1], config['comparison_symbols'][1], config['comparison_symbols'][1], config['comparison_symbols'][1]]), np.array(config['period_timeframe'])] 
+header0 = [np.array([config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0]]), np.array(config['period_timeframe'])] 
+header1 = [np.array([config['columnsNames'][1], config['columnsNames'][1], config['columnsNames'][1], config['columnsNames'][1], config['columnsNames'][1]]), np.array(config['period_timeframe'])] 
+header2 = [np.array([config['columnsNames'][2], config['columnsNames'][2], config['columnsNames'][2], config['columnsNames'][2], config['columnsNames'][2]]), np.array(config['period_timeframe'])]
 df0 = pd.DataFrame(getTotal_correlation0, index = header0).transpose()
 df1 = pd.DataFrame(getTotal_correlation1, index = header1).transpose()
-result = pd.concat([df0, df1], axis=1)
+df2 = pd.DataFrame(getTotal_correlation2, index = header2).transpose()
+result = pd.concat([df0, df1, df2], axis=1)
+# change row and columns names
+result.index = config['rowNames']
 
 # print(result)   ###########
 
@@ -77,13 +84,13 @@ format1 = workbook.add_format({'bg_color': '#FFC7CE',
                                'font_color': '#9C0006'})
 format2 = workbook.add_format({'bg_color': '#C6EFCE',
                                'font_color': '#006100'})
-worksheet.conditional_format('B3:K100', {'type': 'cell',
+worksheet.conditional_format('B3:P100', {'type': 'cell',
                                          'criteria': '<=',
                                          'value': -0.5,
                                          'format': format1})
-worksheet.conditional_format('B4:K100', {'type': 'cell',
+worksheet.conditional_format('B4:P100', {'type': 'cell',
                                          'criteria': '>=',
                                          'value': 0.5,
                                          'format': format2})
-worksheet.set_column(0, 0, 15)
+worksheet.set_column(0, 0, 20)
 writer.save()
