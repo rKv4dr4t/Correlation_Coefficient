@@ -33,7 +33,7 @@ def getCorrelation(symbol1, symbol2, dict):
         else:
             dict[symbol2] = [ round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) ]
 
-print('Caricamento degli indici...')
+print('Loading...')
 
 # loop function through symbols
 for idx, symbol in enumerate(tqdm(config['symbols'])):
@@ -61,11 +61,11 @@ result.index = config['rowNames']
 # get today date
 today = date.today()
 d1 = today.strftime("%d-%m-%Y")
-d1Tot = 'correlation-' + d1 + '.xlsx'
+d1Tot = 'getCorrelation-' + d1 + '.xlsx'
 if config['dateOn'] == True:
     nameExcel = d1Tot
 else:
-    nameExcel = 'correlation.xlsx'
+    nameExcel = 'getCorrelation.xlsx'
 
 # formatting the results in an Excel file
 writer = pd.ExcelWriter(nameExcel, engine='xlsxwriter')
