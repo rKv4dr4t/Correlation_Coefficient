@@ -11,52 +11,40 @@ with open('config.yml', 'r') as file:
     config = yaml.safe_load(file)
 
 getTotal_correlation0 = {}
-getTotal_correlation1 = {}
-getTotal_correlation2 = {}
 
 # function to get correlation
 def getCorrelation(symbol1, symbol2, dict):
+
     for period_item, interval_item in zip(config['period_timeframe'], config['interval_timeframe']):
-        if period_item == '1d':
-            period_item = '2d'
         ticker1 = yahooFinance.Ticker(symbol1)
         data1 = ticker1.history(period = period_item, interval = interval_item)
         ticker2 = yahooFinance.Ticker(symbol2)
         data2 = ticker2.history(period = period_item, interval = interval_item)
 
-        if len(data1) > len(data2):
-            length = len(data2) 
-        else:
-            length = len(data1) 
-        if symbol2 in dict:
-            dict[symbol2].append( round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) )
-        else:
-            dict[symbol2] = [ round( np.corrcoef(data1['Close'][-length:], data2['Close'][-length:])[0,1], 2) ]
+        # avoid pick data with different date info (index have 5 data weekly, crypto 7/7)
+        res = list(set(data1.index)^set(data2.index))
+        if res:
+            for item in res:
+                if item in data1.index:
+                    data1 = data1.drop(labels=[item], axis=0)
+                if item in data2.index:
+                    data2 = data2.drop(labels=[item], axis=0)
 
-print('Loading...')
+        if symbol2 in dict:
+            dict[symbol2].append( round( np.corrcoef(data1['Close'], data2['Close'])[0,1], 2) )
+        else:
+            dict[symbol2] = [ round( np.corrcoef(data1['Close'], data2['Close'])[0,1], 2) ]
 
 # loop function through symbols
 for idx, symbol in enumerate(tqdm(config['symbols'])):
     getCorrelation(config['comparison_symbols'][0], symbol, getTotal_correlation0)
-    getCorrelation(config['comparison_symbols'][1], symbol, getTotal_correlation1)
-    getCorrelation(config['comparison_symbols'][2], symbol, getTotal_correlation2)
 
-# ticker1 = yahooFinance.Ticker('SB=F')
-# data1 = ticker1.history(period = '1d', interval = '1h')
-# print(data1)
+header0 = [np.array([config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0]]), np.array(config['period_timeframe'])] 
 
-# dataframe the results
-header0 = [np.array([config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0], config['columnsNames'][0]]), np.array(config['period_timeframe'])] 
-header1 = [np.array([config['columnsNames'][1], config['columnsNames'][1], config['columnsNames'][1], config['columnsNames'][1], config['columnsNames'][1]]), np.array(config['period_timeframe'])] 
-header2 = [np.array([config['columnsNames'][2], config['columnsNames'][2], config['columnsNames'][2], config['columnsNames'][2], config['columnsNames'][2]]), np.array(config['period_timeframe'])]
 df0 = pd.DataFrame(getTotal_correlation0, index = header0).transpose()
-df1 = pd.DataFrame(getTotal_correlation1, index = header1).transpose()
-df2 = pd.DataFrame(getTotal_correlation2, index = header2).transpose()
-result = pd.concat([df0, df1, df2], axis=1)
+result = pd.concat([df0], axis=1)
 # change row and columns names
 result.index = config['rowNames']
-
-# print(result)   ###########
 
 # get today date
 today = date.today()
